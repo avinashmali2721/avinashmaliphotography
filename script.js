@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
         lightboxImg.classList.remove('show');
 
         setTimeout(() => {
-            lightboxImg.src = galleryImages[index].src;
+            // Use full image path from data attribute, or construct it from thumbnail path
+            const fullImagePath = galleryImages[index].dataset.full || galleryImages[index].src.replace('/thumbnails/', '/');
+            lightboxImg.src = fullImagePath;
             lightboxImg.classList.add('show');
         }, 200);
     }
@@ -27,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         currentIndex = index;
         changeImage(currentIndex);
         lightbox.style.display = 'flex';
-        startSlideshow();
+        //startSlideshow();
     }
 
     // Auto slideshow
@@ -66,14 +68,14 @@ document.addEventListener('DOMContentLoaded', function () {
         stopSlideshow();
         currentIndex = (currentIndex + 1) % galleryImages.length;
         changeImage(currentIndex);
-        startSlideshow();
+       // startSlideshow();
     });
 
     prevBtn.addEventListener('click', () => {
         stopSlideshow();
         currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
         changeImage(currentIndex);
-        startSlideshow();
+        //startSlideshow();
     });
 
     /* -----------------------
@@ -99,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
             stopSlideshow();
             currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
             changeImage(currentIndex);
-            startSlideshow();
+            //startSlideshow();
         }
 
         // Swipe Left = Next
@@ -107,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
             stopSlideshow();
             currentIndex = (currentIndex + 1) % galleryImages.length;
             changeImage(currentIndex);
-            startSlideshow();
+           // startSlideshow();
         }
     }
 });
